@@ -1,0 +1,42 @@
+name: Feature request
+description: Propose a focused behavior change-control capability.
+title: "[idea] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Behavectl intentionally keeps a small product surface.
+        The strongest proposals make persistent agent behavior more explainable,
+        testable, portable, or reversible.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What concrete workflow is painful today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: behavior
+    attributes:
+      label: Desired behavior
+      description: What should Behavectl do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: trust
+    attributes:
+      label: Trust boundary
+      description: |
+        How should review, evaluation, promotion, and rollback work for this feature?
+    validations:
+      required: true
+
+  - type: textarea
+    id: minimal
+    attributes:
+      label: Smallest useful version
+      description: What is the narrowest implementation that creates real value?

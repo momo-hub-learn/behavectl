@@ -1,0 +1,6 @@
+{
+  "session_id": "abc124",
+  "cwd": "/tmp/example-repo",
+  "hook_event_name": "UserPromptSubmit",
+  "prompt": "Implement the login form."
+}

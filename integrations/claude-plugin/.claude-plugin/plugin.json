@@ -1,0 +1,14 @@
+{
+  "name": "behavectl",
+  "displayName": "Behavectl",
+  "version": "0.1.0-alpha.1",
+  "description": "Git for AI behavior. Review, verify, prove, promote, and roll back persistent coding-agent behavior.",
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-behavior",
+    "change-control",
+    "evaluation",
+    "proof",
+    "claude-code"
+  ]
+}

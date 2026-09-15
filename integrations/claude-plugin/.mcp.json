@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "behavectl": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "--yes",
+        "behavectl@0.1.0-alpha.1",
+        "mcp"
+      ]
+    }
+  }
+}

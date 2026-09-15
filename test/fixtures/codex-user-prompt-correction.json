@@ -1,0 +1,10 @@
+{
+  "session_id": "thr_123",
+  "transcript_path": "/tmp/codex-rollout.jsonl",
+  "cwd": "/tmp/example-repo",
+  "hook_event_name": "UserPromptSubmit",
+  "model": "gpt-5.6-sol",
+  "turn_id": "turn_456",
+  "permission_mode": "default",
+  "prompt": "For this project, never edit generated files."
+}

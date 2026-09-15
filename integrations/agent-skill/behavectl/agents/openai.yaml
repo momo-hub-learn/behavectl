@@ -1,0 +1,8 @@
+interface:
+  display_name: "Behavectl"
+  short_description: "Git for AI behavior"
+  brand_color: "#67E8F9"
+  default_prompt: "Use Behavectl to inspect and govern persistent coding-agent behavior in this repository."
+
+policy:
+  allow_implicit_invocation: true

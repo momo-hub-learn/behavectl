@@ -1,0 +1,61 @@
+name: Protocol drift
+about: Claude Code / Codex structured event format appears to have changed.
+title: "[protocol] "
+labels: ["protocol", "bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template when Behavectl reports a protocol/parser failure.
+        Do not attach private project traces. Prefer the synthetic `behavectl rc`
+        or a minimal sanitized reproduction.
+
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Provider
+      options:
+        - Claude Code
+        - Codex
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: cli_version
+    attributes:
+      label: Agent CLI version
+      placeholder: "paste the exact version string"
+    validations:
+      required: true
+
+  - type: input
+    id: behavectl_version
+    attributes:
+      label: Behavectl version
+      placeholder: "0.1.0-alpha.1"
+    validations:
+      required: true
+
+  - type: textarea
+    id: error
+    attributes:
+      label: Behavectl protocol error
+      render: text
+    validations:
+      required: true
+
+  - type: textarea
+    id: replay
+    attributes:
+      label: `behavectl replay` output
+      description: Use a synthetic/sanitized trace only.
+      render: text
+
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy check
+      options:
+        - label: I removed credentials, proprietary source, private prompts, and private agent transcripts.
+          required: true

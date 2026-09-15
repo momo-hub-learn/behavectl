@@ -1,0 +1,6 @@
+{"type":"thread.started","thread_id":"thread_1"}
+{"type":"turn.started"}
+{"type":"item.completed","item":{"id":"item_1","type":"command_execution","command":"node scripts/generate-config.mjs","aggregated_output":"generated","exit_code":0,"status":"completed"}}
+{"type":"item.completed","item":{"id":"item_2","type":"file_change","changes":[{"path":"dist/app-config.json","kind":"update"}]}}
+{"type":"item.completed","item":{"id":"item_3","type":"agent_message","text":"Done"}}
+{"type":"turn.completed","usage":{"input_tokens":100,"output_tokens":25}}

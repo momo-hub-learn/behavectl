@@ -1,0 +1,51 @@
+name: Agent adapter request
+about: Propose support for another codebase-aware coding agent.
+title: "[adapter] "
+labels: ["adapter", "enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Behavectl prefers portable Agent Skills / MCP integration first.
+        A vendor-specific adapter should exist only when capture, evaluation, or
+        compilation truly requires vendor-specific behavior.
+
+  - type: input
+    id: agent
+    attributes:
+      label: Agent / product
+      placeholder: "Product name"
+    validations:
+      required: true
+
+  - type: textarea
+    id: integration
+    attributes:
+      label: Native extension surfaces
+      description: Does it support Agent Skills, MCP, hooks, rules, plugins, or structured headless execution?
+    validations:
+      required: true
+
+  - type: textarea
+    id: use_case
+    attributes:
+      label: Concrete Behavectl workflow
+      description: What persistent behavior change should work end-to-end?
+    validations:
+      required: true
+
+  - type: textarea
+    id: source
+    attributes:
+      label: Official documentation / protocol source
+      description: Link the vendor's official docs or source defining the integration surface.
+    validations:
+      required: true
+
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Trust boundary
+      description: What must remain human-gated for this adapter?
+    validations:
+      required: true

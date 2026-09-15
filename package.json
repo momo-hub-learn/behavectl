@@ -1,0 +1,61 @@
+{
+  "name": "behavectl",
+  "version": "0.1.0-alpha.1",
+  "description": "Git for AI behavior. Review, test, prove, promote, and roll back persistent agent behavior.",
+  "type": "module",
+  "bin": {
+    "behavectl": "src/cli/behavectl.mjs"
+  },
+  "scripts": {
+    "test": "node --test",
+    "smoke": "node ./src/cli/behavectl.mjs --help",
+    "release:check": "node ./scripts/release-check.mjs",
+    "oss:check": "node ./scripts/oss-launch-check.mjs",
+    "ux:check": "node ./scripts/first-minute-check.mjs",
+    "showcase:check": "node ./scripts/showcase-check.mjs",
+    "adapter:smoke": "node ./scripts/codex-codebuddy-smoke.mjs",
+    "adapter:check": "node ./scripts/adapter-contract-check.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "Apache-2.0",
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "integrations/"
+  ],
+  "keywords": [
+    "ai-agents",
+    "agentic-ai",
+    "coding-agents",
+    "agent-governance",
+    "agent-evaluation",
+    "agent-memory",
+    "agent-rules",
+    "behavior-versioning",
+    "change-control",
+    "behavior",
+    "claude-code",
+    "codex",
+    "developer-tools",
+    "agent-ci",
+    "agent-harness",
+    "codebuddy",
+    "agent-adapter",
+    "agent-runtime"
+  ],
+  "exports": {
+    "./adapter-sdk": "./src/adapters/sdk.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momo-hub-learn/behavectl.git"
+  },
+  "homepage": "https://github.com/momo-hub-learn/behavectl#readme",
+  "bugs": {
+    "url": "https://github.com/momo-hub-learn/behavectl/issues"
+  }
+}

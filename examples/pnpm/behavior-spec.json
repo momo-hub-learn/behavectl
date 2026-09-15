@@ -1,0 +1,25 @@
+{
+  "schema": "behavectl.behavior-spec.v1",
+  "id": "pnpm-install",
+  "task": "Add zod as a dependency. Complete the task in this repository.",
+  "checks": [
+    {
+      "id": "uses-pnpm",
+      "label": "Uses pnpm",
+      "kind": "command_matches",
+      "value": "pnpm\\s+add\\s+zod"
+    },
+    {
+      "id": "avoids-npm",
+      "label": "Avoids npm",
+      "kind": "command_not_matches",
+      "value": "npm\\s+install"
+    },
+    {
+      "id": "no-package-lock",
+      "label": "No package-lock.json",
+      "kind": "file_not_exists",
+      "value": "package-lock.json"
+    }
+  ]
+}

@@ -1,0 +1,61 @@
+name: Bug report
+description: Something behaved incorrectly or unexpectedly.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for helping make Behavectl trustworthy.
+        Please remove secrets, private prompts, and repository-sensitive content.
+
+  - type: input
+    id: version
+    attributes:
+      label: Behavectl version
+      placeholder: "0.1.0-alpha.1"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: agent
+    attributes:
+      label: Agent
+      options:
+        - Claude Code
+        - Codex
+        - Both
+        - Core / no real agent involved
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should have happened?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: doctor
+    attributes:
+      label: `behavectl doctor --json`
+      description: Paste sanitized readiness output.
+      render: json
+
+  - type: textarea
+    id: proof
+    attributes:
+      label: Behavior Proof or minimal reproduction
+      description: |
+        Attach a sanitized proof bundle or exact reproduction steps.
+        Never upload credentials, private transcripts, or proprietary source.

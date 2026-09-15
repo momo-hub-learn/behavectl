@@ -1,0 +1,2 @@
+{"type":"assistant","message":{"content":[{"type":"text","text":"I will update the source."},{"type":"tool_use","id":"tool_1","name":"Bash","input":{"command":"node scripts/generate-config.mjs"}}]}}
+{"type":"result","result":"Done","usage":{"input_tokens":120,"output_tokens":30}}
