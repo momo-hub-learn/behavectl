@@ -282,3 +282,16 @@ test('A/B evidence retains real file edits after workspace cleanup and excludes 
   for (const workspace of workspaces) await assert.rejects(fs.access(workspace), { code: 'ENOENT' });
   assert.equal(await fs.readFile(path.join(repo, 'source.txt'), 'utf8'), 'original\n');
 });
+
+
+test('regression commands preserve quoted executable, script and argument paths', async t => {
+  const { runRegressionCommands } = await import('../src/core/eval/observe.mjs');
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'behavectl quoted command '));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  await fs.writeFile(path.join(root, 'script with spaces.cjs'),
+    "process.stdout.write(process.argv[2]);");
+  const command = `"${process.execPath}" "script with spaces.cjs" "two words"`;
+  const [result] = await runRegressionCommands(root, [command]);
+  assert.equal(result.exitCode, 0, result.stderr);
+  assert.equal(result.stdout, 'two words');
+});

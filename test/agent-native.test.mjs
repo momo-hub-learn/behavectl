@@ -253,7 +253,7 @@ test("Claude plugin package exposes the Behavectl skill and stdio MCP server", a
 
   assert.match(
     skill,
-    /^---\nname: behavectl/m,
+    /^---\r?\nname: behavectl/m,
   );
 
   const mcp = JSON.parse(

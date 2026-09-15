@@ -72,12 +72,14 @@ export function diffFiles(before, after) {
 export async function runRegressionCommands(workspace, commands = []) {
   const results = [];
   for (const command of commands) {
-    const shell =
+    const invocation =
       process.platform === "win32"
-        ? ["cmd.exe", ["/d", "/s", "/c", command]]
+        ? [command, []]
         : ["/bin/sh", ["-lc", command]];
 
-    const result = await runProcess(shell[0], shell[1], {
+    const result = await runProcess(invocation[0], invocation[1], {
+      // Let Node handle cmd.exe quoting; CRT argument escaping corrupts shell quotes.
+      shell: process.platform === "win32",
       cwd: workspace,
       timeoutMs: 120_000,
       allowFailure: true,

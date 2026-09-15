@@ -9,6 +9,7 @@ export function runProcess(
     timeoutMs = 120_000,
     input,
     allowFailure = true,
+    shell = false,
   } = {},
 ) {
   return new Promise((resolve, reject) => {
@@ -17,7 +18,7 @@ export function runProcess(
       cwd,
       env: { ...process.env, ...env },
       stdio: ["pipe", "pipe", "pipe"],
-      shell: false,
+      shell,
     });
 
     let stdout = "";
