@@ -1,5 +1,7 @@
 import { compileAll } from "./compiler.mjs";
-import { behaviorPatchDigest } from "./fingerprint.mjs";
+import { behaviorPatchDigest, behaviorSpecDigest } from "./fingerprint.mjs";
+import { defaultSpecPath } from "./specs.mjs";
+import { loadBehaviorSpec } from "./eval/engine.mjs";
 
 export async function promotePatch(store, patchId, { force = false } = {}) {
   const patch = await store.patch(patchId);
@@ -63,6 +65,16 @@ export async function promotePatch(store, patchId, { force = false } = {}) {
       throw new Error(
         `Patch ${patchId} is not eligible for promotion.${suffix} Run \`behavectl verify ${patchId}\` until all declared targets pass.`,
       );
+    }
+
+    const specPath = await defaultSpecPath(store, patchId);
+    if (specPath) {
+      const spec = await loadBehaviorSpec(specPath);
+      if (spec.draft || latestRealVerification.specDigest !== behaviorSpecDigest(spec)) {
+        throw new Error(
+          `Behavior Spec for ${patchId} changed after its latest verification or is still a draft. Review it and re-run \`behavectl verify ${patchId}\` before promotion.`,
+        );
+      }
     }
 
     const passingTargets = new Set(

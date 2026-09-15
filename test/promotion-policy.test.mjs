@@ -173,3 +173,34 @@ test("promotion succeeds only for current fully-covered verification", async () 
   );
   await fs.access(path.join(repo, "AGENTS.md"));
 });
+
+
+test("promotion rejects changed or draft project specs without activating artifacts", async t => {
+  const repo = await fs.mkdtemp(path.join(os.tmpdir(), "behavectl-policy-spec-"));
+  t.after(() => fs.rm(repo, { recursive: true, force: true }));
+  await fs.writeFile(path.join(repo, "package.json"), "{}");
+  const store = new LocalStore(repo);
+  const value = patch();
+  await store.putPatch(value);
+  const verification = await verifyAcrossAgents({
+    repoRoot: repo, patch: value, spec,
+    runners: [passingRunner("claude-code"), passingRunner("codex")],
+  });
+  await store.putVerification(verification);
+  const specDir = path.join(store.root, "specs");
+  await fs.mkdir(specDir, { recursive: true });
+  const specPath = path.join(specDir, `${value.id}.json`);
+  for (const changed of [
+    { ...spec, task: "Remove zod." },
+    { ...spec, checks: [] },
+    { ...spec, regressionCommands: ["npm test"] },
+    { ...spec, draft: true },
+  ]) {
+    await fs.writeFile(specPath, JSON.stringify(changed));
+    await assert.rejects(promotePatch(store, value.id));
+    assert.equal((await store.patch(value.id)).status, "candidate");
+    await assert.rejects(fs.access(path.join(repo, "AGENTS.md")), { code: "ENOENT" });
+  }
+  await fs.writeFile(specPath, JSON.stringify(spec));
+  assert.equal((await promotePatch(store, value.id)).changed, true);
+});
