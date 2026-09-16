@@ -329,6 +329,16 @@ export function countCodexTokens(usage) {
   return Number.isFinite(total) ? total : null;
 }
 
+export function assertCodexExecutionAvailable(parsed) {
+  // Some CLI builds return turn.completed even when every tool was blocked.
+  if (!parsed.commands.length && /sandbox(?:-exec: sandbox_apply|_apply): Operation not permitted/.test(parsed.resultText ?? '')) {
+    const error = new Error('Codex reported that its execution sandbox could not start. No commands were recorded; this run cannot establish a behavior verdict. Run certification in a supported native terminal environment.');
+    error.code = 'BCTL_EVAL_RUNNER_FAILED';
+    error.runner = 'codex';
+    throw error;
+  }
+}
+
 export class CodexRunner {
   constructor({
     timeoutMs = 180_000,
@@ -370,6 +380,7 @@ export class CodexRunner {
     }
 
     const parsed = parseCodexJsonl(result.stdout);
+    assertCodexExecutionAvailable(parsed);
 
     const codexTerminal =
       parsed.events.some(

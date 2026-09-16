@@ -4,6 +4,7 @@ import assert from "node:assert/strict";
 import {
   buildCodexExecArgs,
   countCodexTokens,
+  assertCodexExecutionAvailable,
 } from "../src/core/eval/runners.mjs";
 
 test("Codex candidate behavior is a developer instruction, not mixed into user task", () => {
@@ -64,4 +65,13 @@ test("Codex usage counts cached input and reasoning only once", () => {
   assert.equal(countCodexTokens({input_tokens:50481,cached_input_tokens:39680,output_tokens:326}),50807);
   assert.equal(countCodexTokens({input_tokens:0,output_tokens:0}),0);
   for (const usage of [undefined,{}, {input_tokens:100}, {input_tokens:-1,output_tokens:2}, {input_tokens:Infinity,output_tokens:2}]) assert.equal(countCodexTokens(usage),null);
+});
+
+
+test("Codex sandbox startup report without commands is not a behavior verdict", () => {
+  for (const signature of ['sandbox-exec: sandbox_apply: Operation not permitted','sandbox_apply: Operation not permitted']) {
+    assert.throws(() => assertCodexExecutionAvailable({commands:[],resultText:`Cannot edit: ${signature}`}),{code:'BCTL_EVAL_RUNNER_FAILED'});
+  }
+  assert.doesNotThrow(() => assertCodexExecutionAvailable({commands:[],resultText:'No changes needed.'}));
+  assert.doesNotThrow(() => assertCodexExecutionAvailable({commands:['npm test'],resultText:'Operation not permitted'}));
 });
