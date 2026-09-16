@@ -11,35 +11,82 @@ node src/cli/behavectl.mjs demo
 
 This is explicitly a simulation. It cannot unlock real promotion.
 
-## Install the Trial Kit candidate locally
+## Start from a GitHub checkout
 
-From the Trial Kit directory containing `candidate/` and `scripts/`:
+Requirements: Node.js 20 or later and Git. The repository has zero runtime
+dependencies. From the checkout, try the tour and inspect available agents:
 
 ```bash
-./scripts/CHECK_THIS_MACHINE.sh
+node src/cli/behavectl.mjs demo
+node src/cli/behavectl.mjs agents
 ```
 
-The script checks the candidate SHA-256 and installs into `.trial-runtime/`.
-It makes no model calls. A missing CodeBuddy CLI blocks the two-agent profile,
-but the local Behavectl installation still works.
-
-On macOS / Linux, add that installation to the current terminal session:
+To open Studio for another project without a global install, use the absolute
+path to this checkout's `src/cli/behavectl.mjs`:
 
 ```bash
-export PATH="$PWD/.trial-runtime/node_modules/.bin:$PATH"
+cd /path/to/your-project
+node /path/to/behavectl/src/cli/behavectl.mjs studio
+```
+
+Open the local URL printed by the command. Opening Studio does not start model
+jobs. Choose “记录一次纠正” to create a rule, review its task and checks, then
+explicitly start real verification. Existing projects do not need captured
+history to try this workflow.
+
+The checkout can contain newer documentation or code than a certified package.
+The certification below applies to the exact retained tarball.
+
+## Install the certified alpha locally
+
+The alpha is not yet published to npm. Use `behavectl-0.1.0-alpha.1.tgz` from
+the retained **Codex RC GO** bundle. This is different from the original Trial
+Kit's older `candidate/` package.
+
+From the extracted GO bundle, on macOS / Linux:
+
+```bash
+shasum -a 256 behavectl-0.1.0-alpha.1.tgz
+npm install --prefix ./local-runtime --ignore-scripts --no-audit --no-fund ./behavectl-0.1.0-alpha.1.tgz
+export PATH="$PWD/local-runtime/node_modules/.bin:$PATH"
 behavectl --version
-behavectl demo
 behavectl agents
 ```
 
-On Windows, use `scripts/CHECK_THIS_MACHINE.ps1`, then:
+Expected SHA-256 (stop if it differs):
 
-```powershell
-$env:Path = "$((Get-Location).Path)\.trial-runtime\node_modules\.bin;$env:Path"
-behavectl demo
+```text
+d073d2c9f99b7e66c7f2163b77b8f38fa0fd4e8fa23795c0b41e598fa19fc30e
 ```
 
-Agent detection checks local binaries. It does not verify login or model access.
+On Windows PowerShell, from the same extracted bundle:
+
+```powershell
+Get-FileHash ./behavectl-0.1.0-alpha.1.tgz -Algorithm SHA256
+npm install --prefix ./local-runtime --ignore-scripts --no-audit --no-fund ./behavectl-0.1.0-alpha.1.tgz
+$env:Path = "$((Get-Location).Path)\local-runtime\node_modules\.bin;$env:Path"
+behavectl --version
+behavectl agents
+```
+
+The PATH change lasts for the current terminal session. Installation and agent
+detection make no model calls; detection does not verify login or model access.
+First-alpha certification covers Codex. CodeBuddy is not required for this path.
+
+## Try the same challenge on your machine
+
+With the locally installed command available:
+
+```bash
+behavectl demo create --agents codex
+cd behavectl-killer-demo
+behavectl studio
+```
+
+Creating the challenge and opening Studio are local operations. Use Studio to
+inspect the rule and explicitly start three paired trials (six Codex jobs).
+Real verification requires an authenticated Codex CLI and can incur model cost.
+Your result may differ from the retained certification result.
 
 ## 60 seconds: initialize a repository
 

@@ -505,9 +505,9 @@ Behavior CI + protocol replay
 terminal-native success + failure UX
 ```
 
-The local release gate is automated. Authenticated model evidence is still an
-explicit blocker for any public adapter-certification claim, and this repository
-does not claim real model results until those runs are retained.
+The local release gate is automated. The first Codex RC has retained authenticated
+evidence: six tasks, three paired trials, and an artifact-bound GO. Other adapters
+remain uncertified for this alpha. npm publication and public launch are pending.
 
 ---
 
