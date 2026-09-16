@@ -15,26 +15,28 @@ bind the exact same artifact SHA-256.
 
 ## 2. Choose the certification profile
 
-For the current killer demo:
+First public alpha profile, selected on 2026-09-16:
 
 ```text
-codex,codebuddy
+codex
 ```
 
-This is a release decision, not a permanent product requirement.
+CodeBuddy certification is deferred to a later release; existing adapter support remains available.
+This profile is a release decision, not a permanent product requirement.
 
 ## 3A. Same machine
 
 If all profile adapters are authenticated on one machine:
 
 ```bash
-behavectl rc --agents codex,codebuddy \
+behavectl rc --agents codex \
   --artifact ./behavectl-0.1.0-alpha.1.tgz \
   --yes --out ./release-candidate
 ```
 
-## 3B. Distributed native environments
+## 3B. Future multi-agent profiles: distributed native environments
 
+The following optional example uses a future `codex,codebuddy` profile; it is not required for the first Codex-only alpha.
 If the adapters live on different machines, each machine receives the **same
 candidate tarball**.
 

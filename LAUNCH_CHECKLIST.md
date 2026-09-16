@@ -100,7 +100,7 @@ The first public release is blocked until every **required** item is complete.
 
 - [x] Reserve/confirm the final GitHub repository name: `momo-hub-learn/behavectl` (private preparation repository)
 - [ ] Reserve/confirm the final npm package name
-- [ ] Choose and record the first public certification profile (current target: `codex,codebuddy`)
+- [x] First public certification profile: `codex` (user decision, 2026-09-16); CodeBuddy certification follows later. Existing adapter support remains available.
 - [ ] Produce a VALID artifact-bound RC shard for every adapter in that profile, in each adapter's native authenticated environment
 - [ ] Merge the complete profile with `behavectl rc merge` and require profile / patch / spec / artifact-digest agreement
 - [ ] Retain the real `behavectl rc` GO bundle
