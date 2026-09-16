@@ -85,63 +85,50 @@ Behavectl makes the behavior change itself a first-class artifact: a
 That difference is the product.
 ---
 
-## One correction becomes a controlled change
+## A real correction, measured before and after
 
-Your agent learns:
+A generated configuration can look fixed while its source is still wrong.
+The next generation step brings the bug back. Behavectl tests whether an agent
+fixes the canonical source, runs the generator, and leaves both files consistent.
 
-```text
-"Don't use npm in this repo. We always use pnpm."
-```
+The correction: **edit the source of truth, then regenerate the output.**
 
-Behavectl surfaces a patch instead of silently turning it into policy:
+On September 16, 2026, we ran three paired trials with the native Codex CLI:
+three tasks without the rule and three with it. Complete task passes improved
+from **1/3 to 3/3**. Two pairs improved; one already passed before the correction.
 
-```text
-╭────────────────────────────────────────────────────────────────────────────╮
-│ ◆ BEHAVECTL  Behavior change review                          TESTED    L1  │
-╰────────────────────────────────────────────────────────────────────────────╯
-
-  bp_pnpm_4f7a
-  Don't use npm in this repo. We always use pnpm.
-
-  WHY IT SURFACED
-  ● Explicit user correction · 100% confidence
-  ● pnpm-lock.yaml · exists in the project root
-  ● packageManager = pnpm@10.4.1
-
-  EXPECTED BEHAVIOR
-  ◆ Uses pnpm
-  ◆ Avoids npm
-  ◆ No package-lock.json
-```
-
-Then Behavectl tests real agent behavior **before and after**. The following
-matrix illustrates the output format; it is not retained real-model evidence:
+Retained certification output:
 
 ```text
-Cross-Agent Behavior Matrix
+Cross-Agent Behavior Matrix · bp_demo_generated_config
 
-Check                  Codex              CodeBuddy Code
-─────────────────────  ─────────────────  ─────────────────
-Uses pnpm              0/3 → 3/3          0/3 → 3/3
-Avoids npm             0/3 → 3/3          0/3 → 3/3
-No package-lock.json   0/3 → 3/3          0/3 → 3/3
+Check                           Codex
+──────────────────────────────  ──────────────────
+Updates canonical source        1/3 → 3/3
+Updates generated config        3/3 → 3/3
+Runs generator                  1/3 → 3/3
+Generated config is consistent  1/3 → 3/3
 
-Coverage: 2/2 agents stable
-Trials:   6/6 passed
-Verdict:  READY TO PROMOTE
+Coverage: 1/1 agents stable
+Trials: 3/3 passed
+Verdict: STABLE ENOUGH TO PROMOTE
+
+Protocol replay     VALID
+Trace integrity     VALID
+Proof integrity     VALID
+Proof binding       VALID
+
+RELEASE CANDIDATE: GO
 ```
 
-Only then can a human promote the exact verified patch.
+All 13 release-candidate checks passed, with six raw execution traces and a
+proof bound to the exact package. This is one generated-config task on
+Codex, with three pairs—not a claim about every task or other agents.
+[Certification record and artifact fingerprint →](LAUNCH_CHECKLIST.md)
 
-```text
-✓ Behavior promoted
-
-Codex          AGENTS.md
-CodeBuddy Code .codebuddy/rules/behavectl/bp_pnpm_4f7a.md
-
-Rollback anytime:
-behavectl rollback bp_pnpm_4f7a
-```
+Studio lets you inspect the actual commands and file changes before promoting
+the verified rule. Promotion persists the instruction in the agent's native
+rule file; rollback removes the managed change.
 
 > **Learning can be automatic. Shipping behavior should not be.**
 
@@ -170,7 +157,7 @@ Detection does not verify authentication or model access.
 Create the killer demo specifically for the agents on your machine:
 
 ```bash
-behavectl demo create --agents codex,codebuddy
+behavectl demo create --agents codex
 cd behavectl-killer-demo
 behavectl verify bp_demo_generated_config --repeat 3
 ```
@@ -179,7 +166,7 @@ The core invariant is simple:
 
 > **Behavectl governs behavior. Adapters translate that behavior into each agent's native runtime.**
 
-Current adapters:
+Current adapters (adapter status is separate from release certification):
 
 | Adapter | Real A/B eval | Promotion surface | Status |
 |---|---:|---|---|
@@ -187,6 +174,8 @@ Current adapters:
 | CodeBuddy Code | ✓ | `.codebuddy/rules/behavectl/*.md` | Beta |
 | Claude Code | ✓ | `.claude/rules/behavectl/*.md` | Stable |
 
+The first alpha RC is certified for **Codex**. CodeBuddy Code and Claude Code
+are supported adapters without certification in this release.
 Cross-agent does not mean colocated, and supported does not mean required.
 
 ### Bring another agent without changing Core

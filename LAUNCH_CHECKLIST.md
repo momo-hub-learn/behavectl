@@ -108,7 +108,7 @@ The first public release is blocked until every **required** item is complete.
 - [x] Archive the RC bundle containing raw traces, Protocol Replay report, Behavior Proof, exact npm tarball, and RELEASE_SEAL.md
 - [x] Verify RELEASE_SEAL.md against the retained npm tarball
 - [ ] Record hero terminal demo from the retained proof run
-- [ ] Replace README illustrative output with real retained output
+- [x] Replace README illustrative output with real retained output (Codex generated-config challenge; 1/3 → 3/3).
 - [x] Add real repository/homepage/bug-report metadata to `package.json`
 - [ ] Tag `v0.1.0-alpha.1`
 - [ ] Publish npm alpha

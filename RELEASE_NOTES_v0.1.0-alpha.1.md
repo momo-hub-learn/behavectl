@@ -40,12 +40,21 @@ behavior regressions.
 
 ### Status
 
-This is an unpublished alpha candidate. Public adapter-certification claims are
-gated on retained authenticated evidence for the explicitly declared target
-profile; Behavectl does not require every supported Agent to participate.
-The first public certification profile is **Codex**. CodeBuddy certification is
-planned for a later release; adapter availability does not imply certification.
-A successful release gate and retained artifact-bound GO bundle are still required.
+This is an **unpublished alpha candidate with a verified Codex RC GO**.
+On September 16, 2026, three paired native Codex trials (six real tasks) improved
+complete-task passes from **1/3 to 3/3** on the generated-config challenge.
+All 13 RC checks passed, including protocol replay, trace and proof integrity,
+and binding to the retained publish artifact.
+
+This result covers one challenge and the recorded Codex CLI version; it does
+not establish broad benchmark performance. CodeBuddy Code and Claude Code
+remain supported adapters without certification in this release.
+
+Certified artifact SHA-256:
+`d073d2c9f99b7e66c7f2163b77b8f38fa0fd4e8fa23795c0b41e598fa19fc30e`.
+Publish the retained artifact without repacking it.
+See [the launch checklist](LAUNCH_CHECKLIST.md) for certification lineage and
+remaining publication steps.
 
 ### Interface
 
