@@ -171,7 +171,7 @@ export function killerDemoSpec() {
         id: "runs-generator",
         label: "Runs generator",
         kind: "command_matches",
-        value: "node\\s+scripts/generate-config\\.mjs",
+        value: "(?:node\\s+(?:\\./)?scripts/generate-config\\.mjs|npm\\s+run\\s+generate)(?=$|[\\s\"';|&])",
       },
       {
         id: "config-consistent",

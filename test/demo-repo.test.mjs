@@ -6,6 +6,7 @@ import path from "node:path";
 
 import {
   createKillerDemoRepo,
+  killerDemoSpec,
   KILLER_DEMO_PATCH_ID,
 } from "../src/core/demo-repo.mjs";
 import { runProcess } from "../src/core/eval/process.mjs";
@@ -192,4 +193,22 @@ test("killer demo Behavior Spec produces a deterministic FAIL → PASS evaluatio
   assert.equal(after.get("runs-generator"), true);
   assert.equal(before.get("config-consistent"), false);
   assert.equal(after.get("config-consistent"), true);
+});
+
+
+test("demo generator check accepts the package script alias without matching other scripts", async () => {
+  const { evaluateAssertions } = await import("../src/core/eval/assertions.mjs");
+  const check = killerDemoSpec().checks.find(item => item.id === "runs-generator");
+  for (const [command, expected] of [
+    ["node scripts/generate-config.mjs", true],
+    ["node ./scripts/generate-config.mjs", true],
+    ["/bin/zsh -lc 'npm run generate && npm run verify && git diff --check'", true],
+    ["npm run generate", true],
+    ["npm run generate-other", false],
+    ["node scripts/generate-config.mjs.backup", false],
+    ["npm run verify", false],
+  ]) {
+    const result = await evaluateAssertions({ checks: [check] }, { commands: [command] }, os.tmpdir());
+    assert.equal(result.checks[0].passed, expected, command);
+  }
 });
