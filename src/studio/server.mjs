@@ -72,11 +72,11 @@ export async function startStudio({ repoRoot, port = 4317 }) {
         const health = await doctor();
         const missing = patch.targets.filter(id => !health.ready[id]);
         if (missing.length) throw new Error(`Missing Agent CLI: ${missing.join(', ')}`);
-        job = { state: 'running', id: patch.id, events: [], targets: [...patch.targets], repeat: 3, startedAt: new Date().toISOString() };
+        job = { state: 'running', id: patch.id, events: [], evaluations: [], targets: [...patch.targets], repeat: 3, startedAt: new Date().toISOString() };
         const current = job;
         (async () => {
           try {
-            const record = await verifyAcrossAgents({ repoRoot, patch, spec: model.spec, runners: patch.targets.map(id => createAgentRunner(id)), repeat: 3, onProgress: async e => { current.events.push({ agent: e.agent, trial: e.trial, phase: e.phase, state: e.state }); } });
+            const record = await verifyAcrossAgents({ repoRoot, patch, spec: model.spec, runners: patch.targets.map(id => createAgentRunner(id)), repeat: 3, onProgress: async e => { current.events.push({ agent: e.agent, trial: e.trial, phase: e.phase, state: e.state }); if (e.phase === 'agent' && e.state === 'done' && e.result) current.evaluations.push(e.result); } });
             for (const evaluation of record.evaluations) await store.putEvaluation(evaluation);
             await store.putVerification(record);
             if (record.verdict === 'promote') { await store.updatePatch(patch.id, p => ({ ...p, status: 'tested' })); await createBehaviorProof(store, patch.id); }

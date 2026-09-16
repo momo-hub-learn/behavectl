@@ -77,7 +77,8 @@ $('tour').classList.toggle('selected',mode==='demo');$('project').classList.togg
 $('patches').replaceChildren();if(mode==='project')for(const m of state?.models??[]){const b=document.createElement('button');b.className='selected-patch';b.textContent=m.patch.behavior.statement.slice(0,65);b.onclick=()=>{selected=m.patch.id;render()};$('patches').appendChild(b)}
 const m=model(),demo=mode==='demo';
 renderProgress(!demo&&state?.job?.id===selected?state.job:null,m?.patch.targets??[]);
-const runs=m?.verification?.evaluations??m?.evaluations??[];
+const partial=!demo&&state?.job?.id===selected&&state.job.state==='running';
+const runs=partial?(state.job.evaluations??[]):m?.verification?.evaluations??m?.evaluations??[];
 if(trialIndex>=runs.length)trialIndex=0;
 const evaluation=runs[trialIndex];
 renderFileChanges(demo?null:evaluation);
@@ -85,7 +86,7 @@ $('trials').replaceChildren();$('runSummary').textContent='';
 if(!demo&&runs.length){for(const [i,run] of runs.entries()){const button=document.createElement('button');button.className='btn'+(i===trialIndex?' primary':'');button.setAttribute('aria-pressed',String(i===trialIndex));button.textContent=`${run.runner} · 第 ${run.trial??i+1} 轮 · ${run.candidate?.passed?'通过':'未通过'}`;button.onclick=()=>{trialIndex=i;render()};$('trials').appendChild(button)}
 const improved=runs.filter(r=>r.candidate?.passed&&!r.baseline?.passed).length;
 const unchanged=runs.filter(r=>r.candidate?.passed&&r.baseline?.passed).length;
-$('runSummary').textContent=`${runs.length} 轮记录 · ${improved} 轮从未通过变为通过 · ${unchanged} 轮前后均通过`+(m.verification?(m.verificationCurrent?'':' · 历史结果：与当前规则或检查版本不一致'):' · 尚无完整的多轮验证结论');}
+$('runSummary').textContent=`${runs.length} 轮记录 · ${improved} 轮从未通过变为通过 · ${unchanged} 轮前后均通过`+(partial?' · 本次验证尚未完成，当前仅为已完成轮次':m.verification?(m.verificationCurrent?'':' · 历史结果：与当前规则或检查版本不一致'):' · 尚无完整的多轮验证结论');}
 document.querySelector('h1').textContent=demo?'它又改了生成文件。这次，让纠正有据可依。':'这次纠正，留给下一次更好的执行。';$('flow').hidden=!demo;$('flow').querySelectorAll('span').forEach((el,i)=>{el.className=i===demoStep?'active':i<demoStep?'done':''});$('timeline').textContent=demo?['选择下方按钮，回放一次模拟纠正。','示例：Agent 直接改动 dist/app-config.json，源配置未同步。','示例：注入规则 → 修改源文件 → 运行生成器。','示例回放完成。真实使用时，每个 PASS 都需要实际运行证据。'][demoStep]:'';$('title').textContent=demo?'01 / 不再直接修改生成文件':m?.patch.id??'当前项目还没有待审查规则';$('badge').textContent=demo?'示例 · SIMULATION':({candidate:'待验证',tested:'已验证',active:'已生效',retired:'已撤回'}[m?.patch.status]??'空项目');
 $('rule').textContent=demo?'修改配置时，先修改源文件，再运行生成器。':m?.patch.behavior.statement??'通过 behavectl learn 捕获纠正，或在独立目录运行 behavectl demo create 创建可验证示例。';
 $('beforeTag').textContent=demo?'示例行为':'原始运行';$('afterTag').textContent=demo?'示例行为':'规则注入后';
@@ -93,10 +94,10 @@ if(demo){$('before').innerHTML='dist/app-config.json\n\n<span class="minus">− 
 if(demo&&demoStep<2){$('after').textContent='等待纠正…\n\n先确认错误，再看规则如何改变执行动作。'}
 const checks=demo?['修改源配置','运行生成器','生成结果一致'].map(label=>({label,b:demoStep>=1?'FAIL':'—',a:demoStep>=3?'PASS':'—'})):(m?.spec?.checks??[]).map(c=>({label:c.label,b:evaluation?.baseline.checks.find(x=>x.id===c.id)?.passed,a:evaluation?.candidate.checks.find(x=>x.id===c.id)?.passed}));
 $('checks').innerHTML='<div class="check hint"><span>验证项</span><span>修改前</span><span>修改后</span></div>'+checks.map(c=>'<div class="check"><span>'+esc(c.label)+'</span><span class="bad">'+esc(typeof c.b==='boolean'?(c.b?'PASS':'FAIL'):c.b??'—')+'</span><span class="good">'+esc(typeof c.a==='boolean'?(c.a?'PASS':'FAIL'):c.a??'—')+'</span></div>').join('');
-$('evidence').textContent=demo?'示例结果仅用于说明产品流程，不创建验证记录或可推广证据。':JSON.stringify(m?.verification??{status:'尚无真实验证记录'},null,2);
+$('evidence').textContent=demo?'示例结果仅用于说明产品流程，不创建验证记录或可推广证据。':JSON.stringify(partial?{status:'验证进行中，非完整结论',evaluations:runs}:m?.verification??{status:'尚无真实验证记录'},null,2);
 $('hint').textContent=demo?'示例不调用模型，不修改项目。':`${m?.patch.targets.join(' · ')??'未选择规则'} · 3 轮前后对照`;
 $('run').textContent=demo?(demoRunning?'正在回放示例…':demoPlayed?'重新回放 →':'播放纠正过程 →'):'运行真实验证 →';$('run').disabled=demo?demoRunning:(!m||busy);$('edit').hidden=demo||!m;$('promote').hidden=demo||!m||m.patch.status==='active';$('promote').disabled=!m?.verificationCurrent||m?.verification?.verdict!=='promote'||busy;$('rollback').hidden=demo||m?.patch.status!=='active';message(demo?'示例演示 · 以下结果不代表真实 Agent 表现。':'');
-if(!demo&&state?.job){const j=state.job;if(j.id===selected)message(j.state==='failed'?j.error:j.state==='running'?'真实任务运行中，结果会在整组完成后显示。': '验证完成：'+j.verdict)}
+if(!demo&&state?.job){const j=state.job;if(j.id===selected)message(j.state==='failed'?j.error:j.state==='running'?'真实任务运行中，每完成一轮对照即显示结果。整组完成前不可启用。': '验证完成：'+j.verdict)}
 }
 function openComposer(){mode='project';render();$('compose').hidden=false;$('reviewWorkspace').hidden=true;document.querySelectorAll('input[name=newTarget]').forEach(x=>{x.checked=Boolean(state?.health?.ready?.[x.value])});$('newStatement').focus()}
 $('newRule').onclick=openComposer;
