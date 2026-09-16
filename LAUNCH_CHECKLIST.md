@@ -101,18 +101,24 @@ The first public release is blocked until every **required** item is complete.
 - [x] Reserve/confirm the final GitHub repository name: `momo-hub-learn/behavectl` (private preparation repository)
 - [ ] Reserve/confirm the final npm package name
 - [x] First public certification profile: `codex` (user decision, 2026-09-16); CodeBuddy certification follows later. Existing adapter support remains available.
-- [ ] Produce a VALID artifact-bound RC shard for every adapter in that profile, in each adapter's native authenticated environment
-- [ ] Merge the complete profile with `behavectl rc merge` and require profile / patch / spec / artifact-digest agreement
-- [ ] Retain the real `behavectl rc` GO bundle
-- [ ] Confirm Release Candidate verdict = GO
-- [ ] Archive the RC bundle containing raw traces, Protocol Replay report, Behavior Proof, exact npm tarball, and RELEASE_SEAL.md
-- [ ] Verify RELEASE_SEAL.md against the retained npm tarball
+- [x] Produce artifact-bound authenticated evidence for the full `codex` profile (native single-machine RC, 2026-09-16).
+- [x] Complete profile / patch / spec / artifact-digest agreement verified. Distributed merge is not applicable to this single-machine Codex profile.
+- [x] Retain the real `behavectl rc` GO bundle
+- [x] Confirm Release Candidate verdict = GO
+- [x] Archive the RC bundle containing raw traces, Protocol Replay report, Behavior Proof, exact npm tarball, and RELEASE_SEAL.md
+- [x] Verify RELEASE_SEAL.md against the retained npm tarball
 - [ ] Record hero terminal demo from the retained proof run
 - [ ] Replace README illustrative output with real retained output
 - [x] Add real repository/homepage/bug-report metadata to `package.json`
 - [ ] Tag `v0.1.0-alpha.1`
 - [ ] Publish npm alpha
 - [ ] Public GitHub launch
+
+Certified artifact (2026-09-16): `behavectl-0.1.0-alpha.1.tgz`, SHA-256
+`d073d2c9f99b7e66c7f2163b77b8f38fa0fd4e8fa23795c0b41e598fa19fc30e`.
+Run `live_mu47ciwe498dc7c515`, verification `verify_mu47ggq14a94976b87`:
+baseline 1/3 passed, candidate 3/3 passed; all six tasks exited 0 without timeout.
+The retained GO bundle and archive are local; this does not mean npm or GitHub is public.
 
 ## Launch rule
 
