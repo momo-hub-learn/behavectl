@@ -1,102 +1,64 @@
 # Hero Demo — Recording Script
 
-Target length: **25–35 seconds**.
+Target length: **25–35 seconds**. Use the retained native Codex certification
+from September 16, 2026. Label edited playback **Recorded real run**; do not
+present cuts or replays as a new live execution.
 
-The hero demo must be a real authenticated run. No fixture output is allowed.
+## Scene 1 — the bug that comes back (0–6s)
 
-## Scene 1 — the learning signal
+Show the task: change `displayName` from `Alpha` to `Beta`.
+Show trial 1 baseline: only `dist/app-config.json` changed. The generated file
+looks correct, but the independent verification reports `generated config is stale`.
+The canonical source still says `Alpha`.
 
-Claude Code session:
+## Scene 2 — one correction (6–11s)
 
-```text
-User:
-Don't use npm in this repo. We always use pnpm.
-```
+Show the rule: edit the canonical source, then regenerate the output.
+Use the retained patch text when recording; this sentence is a summary.
 
-Behavectl captures the correction through the local hook bridge.
+## Scene 3 — the actual behavior changes (11–22s)
 
-## Scene 2 — the inbox
+Show trial 1 candidate file changes side by side:
 
-```bash
-behavectl review
-```
+- `config/app-config.source.json`: `Alpha` → `Beta`
+- `dist/app-config.json`: `Alpha` → `Beta`
 
-Show only long enough to read:
+Show the retained command: `node scripts/generate-config.mjs`.
+All four checks pass: source updated, generated file updated, generator run,
+and source/output consistency.
 
-```text
-What changed
-  Don't use npm in this repo. We always use pnpm.
+## Scene 4 — repeated evidence (22–29s)
 
-Why Behavectl surfaced it
-  ✓ Explicit user correction
-  ✓ pnpm-lock.yaml
-  ✓ packageManager = pnpm@10.4.1
-```
-
-## Scene 3 — verification
-
-Press `T`.
-
-If both agents are installed, review now verifies the same Behavior Patch
-against Claude Code and Codex.
-
-Cut directly to:
+Show the complete three-pair result, not just the successful first pair:
 
 ```text
-Cross-Agent Behavior Matrix
+Codex               WITHOUT RULE     WITH RULE
+Complete task pass       1/3             3/3
 
-                       Claude Code       Codex
-Uses pnpm              FAIL → PASS       FAIL → PASS
-Avoids npm             FAIL → PASS       FAIL → PASS
-
-Coverage: 2/2 agents passed
+2 pairs improved · 1 pair already passed
+6 real tasks · 13/13 release checks · RC GO
 ```
 
-## Scene 4 — promotion
+## Scene 5 — inspect before promotion (29–35s)
 
-Press `P`.
+Show the retained proof and the exact package fingerprint. End card:
 
-```text
-✓ Behavior promoted
+> Behavectl — Test the rule before your agent keeps it.
 
-Claude Code   .claude/rules/behavectl/...
-Codex         AGENTS.md
+Do not show a promotion as completed unless it was actually executed and
+recorded. Certification is evidence of eligibility, not evidence of promotion.
 
-Rollback anytime:
-behavectl rollback bp_...
-```
+## Source and recording rules
 
-## Scene 5 — proof
+- Certification: `live_mu47ciwe498dc7c515`.
+- Verification: `verify_mu47ggq14a94976b87`.
+- Use `proof/evaluations/codex-trial-01.json` for the selected file/command scene.
+- Use all three retained evaluations for aggregate scores.
+- Keep the original proof bundle unchanged; edit only the presentation.
+- Crop private local paths and account details out of the public recording.
+- No simulated commands, invented outcomes, or untested agent claims.
+- Keep the result limitation visible: one challenge, Codex, three paired trials.
+- `assets/codex-proof.svg` is a static evidence summary, not a recording or UI screenshot.
 
-Very short final cut:
-
-```bash
-behavectl proof bp_...
-```
-
-and:
-
-```text
-PROOF.md
-behavior-matrix.txt
-evaluations/
-diffs/
-```
-
-End card:
-
-> **Behavectl — Git for AI behavior.**
-
-> **Your agents already learn. Make learning safe to ship.**
-
-## Recording rules
-
-- real Claude Code and real Codex;
-- clean repository;
-- no API keys visible;
-- no hidden edits between cuts;
-- terminal at readable font size;
-- one dark terminal theme;
-- no decorative dashboard;
-- no fixture or mock labels in the hero demo because fixtures are not used;
-- preserve the raw proof bundle used for the recording.
+The recording itself remains a launch-checklist item until a video is produced
+and visually checked.

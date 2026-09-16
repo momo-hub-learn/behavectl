@@ -87,6 +87,8 @@ That difference is the product.
 
 ## A real correction, measured before and after
 
+![Recorded Codex evidence: complete task passes improved from 1/3 to 3/3.](docs/assets/codex-proof.svg)
+
 A generated configuration can look fixed while its source is still wrong.
 The next generation step brings the bug back. Behavectl tests whether an agent
 fixes the canonical source, runs the generator, and leaves both files consistent.
