@@ -43,8 +43,18 @@ behavior regressions.
 This is an unpublished alpha candidate. Public adapter-certification claims are
 gated on retained authenticated evidence for the explicitly declared target
 profile; Behavectl does not require every supported Agent to participate.
+The first public certification profile is **Codex**. CodeBuddy certification is
+planned for a later release; adapter availability does not imply certification.
+A successful release gate and retained artifact-bound GO bundle are still required.
 
 ### Interface
+
+- local Studio with project-rule diagnosis and an explicit correction-to-draft workflow
+- editable behavior rules, target agents, validation tasks, and checks
+- real A/B commands and bounded before/after file contents retained for review
+- per-trial results shown as each paired trial finishes; partial results cannot enable promotion
+- event-backed task stages and elapsed time, with completed tasks distinguished from passing checks
+- explicit stale-evidence labels when a rule or project specification changes
 
 - stable public error references for known user-facing failures
 - typo-aware command recovery for common near-miss commands
