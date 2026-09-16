@@ -72,7 +72,7 @@ export async function startStudio({ repoRoot, port = 4317 }) {
         const health = await doctor();
         const missing = patch.targets.filter(id => !health.ready[id]);
         if (missing.length) throw new Error(`Missing Agent CLI: ${missing.join(', ')}`);
-        job = { state: 'running', id: patch.id, events: [], startedAt: new Date().toISOString() };
+        job = { state: 'running', id: patch.id, events: [], targets: [...patch.targets], repeat: 3, startedAt: new Date().toISOString() };
         const current = job;
         (async () => {
           try {
@@ -80,8 +80,8 @@ export async function startStudio({ repoRoot, port = 4317 }) {
             for (const evaluation of record.evaluations) await store.putEvaluation(evaluation);
             await store.putVerification(record);
             if (record.verdict === 'promote') { await store.updatePatch(patch.id, p => ({ ...p, status: 'tested' })); await createBehaviorProof(store, patch.id); }
-            current.state = 'done'; current.verdict = record.verdict;
-          } catch (error) { current.state = 'failed'; current.error = error.message; }
+            current.finishedAt = new Date().toISOString(); current.state = 'done'; current.verdict = record.verdict;
+          } catch (error) { current.finishedAt = new Date().toISOString(); current.state = 'failed'; current.error = error.message; }
         })();
         return send(202, current);
       }
