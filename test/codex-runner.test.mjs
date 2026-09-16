@@ -3,6 +3,7 @@ import assert from "node:assert/strict";
 
 import {
   buildCodexExecArgs,
+  countCodexTokens,
 } from "../src/core/eval/runners.mjs";
 
 test("Codex candidate behavior is a developer instruction, not mixed into user task", () => {
@@ -55,4 +56,12 @@ test("Codex baseline has no candidate developer instruction", () => {
   assert.equal(args.includes("-c"), false);
   assert.equal(args.at(-1), "Change Alpha to Beta.");
   assert.ok(args.includes("workspace-write"));
+});
+
+
+test("Codex usage counts cached input and reasoning only once", () => {
+  assert.equal(countCodexTokens({input_tokens:100,cached_input_tokens:20,output_tokens:15,reasoning_output_tokens:5}),115);
+  assert.equal(countCodexTokens({input_tokens:50481,cached_input_tokens:39680,output_tokens:326}),50807);
+  assert.equal(countCodexTokens({input_tokens:0,output_tokens:0}),0);
+  for (const usage of [undefined,{}, {input_tokens:100}, {input_tokens:-1,output_tokens:2}, {input_tokens:Infinity,output_tokens:2}]) assert.equal(countCodexTokens(usage),null);
 });

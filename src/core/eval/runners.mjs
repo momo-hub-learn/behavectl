@@ -322,6 +322,13 @@ export function buildCodexExecArgs({ task, patch }) {
   return args;
 }
 
+// Codex input_tokens includes cached input; reasoning tokens are part of output.
+export function countCodexTokens(usage) {
+  if (!usage || !Number.isFinite(usage.input_tokens) || !Number.isFinite(usage.output_tokens) || usage.input_tokens < 0 || usage.output_tokens < 0) return null;
+  const total = usage.input_tokens + usage.output_tokens;
+  return Number.isFinite(total) ? total : null;
+}
+
 export class CodexRunner {
   constructor({
     timeoutMs = 180_000,
@@ -395,7 +402,7 @@ export class CodexRunner {
         protocolParser: "behavectl.codex-exec-jsonl.v1",
         eventCount: parsed.events.length,
         usage: parsed.usage,
-        tokenCount: tokenCount(parsed.usage),
+        tokenCount: countCodexTokens(parsed.usage),
         commandItemCount: parsed.commandItems.length,
         fileChangeCount: parsed.fileChanges.length,
         durationMs: result.durationMs,
