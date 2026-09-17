@@ -98,7 +98,7 @@ The first public release is blocked until every **required** item is complete.
 
 - [x] Public product name selected: `Behavectl`; exact-name collision search found no indexed AI/devtool conflict
 
-- [x] Reserve/confirm the final GitHub repository name: `momo-hub-learn/behavectl` (private preparation repository)
+- [x] Reserve/confirm the final GitHub repository name: `momo-hub-learn/behavectl` (public repository)
 - [ ] Reserve/confirm the final npm package name (deferred; GitHub-first distribution, user decision 2026-09-17)
 - [x] First public certification profile: `codex` (user decision, 2026-09-16); CodeBuddy certification follows later. Existing adapter support remains available.
 - [x] Produce artifact-bound authenticated evidence for the full `codex` profile (native single-machine RC, 2026-09-16).
@@ -110,9 +110,9 @@ The first public release is blocked until every **required** item is complete.
 - [ ] Record hero terminal demo from the retained proof run (follow-up; not claimed as complete for the GitHub-first release)
 - [x] Replace README illustrative output with real retained output (Codex generated-config challenge; 1/3 → 3/3).
 - [x] Add real repository/homepage/bug-report metadata to `package.json`
-- [x] Tag `v0.1.0-alpha.1` and GitHub pre-release created (2026-09-17; repository still private)
+- [x] Tag `v0.1.0-alpha.1` and GitHub pre-release created (2026-09-17)
 - [ ] Publish npm alpha (follow-up; not a blocker for GitHub-first release)
-- [ ] Public GitHub launch
+- [x] Public GitHub launch (anonymous repository and release access verified; downloaded tarball SHA-256 matches RC)
 
 Certified artifact (2026-09-16): `behavectl-0.1.0-alpha.1.tgz`, SHA-256
 `d073d2c9f99b7e66c7f2163b77b8f38fa0fd4e8fa23795c0b41e598fa19fc30e`.
@@ -120,7 +120,8 @@ Run `live_mu47ciwe498dc7c515`, verification `verify_mu47ggq14a94976b87`:
 baseline 1/3 passed, candidate 3/3 passed; all six tasks exited 0 without timeout.
 The full GO bundle and archive remain local. The certified tarball is attached to
 the GitHub pre-release at https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1.
-The repository is still private; public visibility is the remaining GitHub launch step.
+The repository and release are publicly accessible. The anonymously downloaded
+release asset matches the certified SHA-256. npm distribution remains deferred.
 
 ## Launch rule
 

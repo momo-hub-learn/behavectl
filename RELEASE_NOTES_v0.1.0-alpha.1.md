@@ -40,7 +40,9 @@ behavior regressions.
 
 ### Status
 
-This is an **unpublished alpha candidate with a verified Codex RC GO**.
+This is a **GitHub alpha pre-release with a verified Codex RC GO**.
+[Download the certified package](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1).
+No npm account is needed; npm registry distribution is deferred.
 On September 16, 2026, three paired native Codex trials (six real tasks) improved
 complete-task passes from **1/3 to 3/3** on the generated-config challenge.
 All 13 RC checks passed, including protocol replay, trace and proof integrity,

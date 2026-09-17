@@ -2,8 +2,9 @@
 
 ## 30 seconds: understand the product
 
-This is an unpublished alpha candidate. From the source directory, no install
-or coding-agent account is required:
+The [GitHub alpha](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1)
+is available. From a source checkout, try the tour without installation or a
+coding-agent account:
 
 ```bash
 node src/cli/behavectl.mjs demo
@@ -39,11 +40,12 @@ The certification below applies to the exact retained tarball.
 
 ## Install the certified alpha locally
 
-The alpha is not yet published to npm. Use `behavectl-0.1.0-alpha.1.tgz` from
-the retained **Codex RC GO** bundle. This is different from the original Trial
+Download `behavectl-0.1.0-alpha.1.tgz` from the
+[GitHub release assets](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1).
+This is the retained **Codex RC GO** package; npm registry distribution is deferred. This is different from the original Trial
 Kit's older `candidate/` package.
 
-From the extracted GO bundle, on macOS / Linux:
+From the directory containing the downloaded tarball, on macOS / Linux:
 
 ```bash
 shasum -a 256 behavectl-0.1.0-alpha.1.tgz
@@ -59,7 +61,7 @@ Expected SHA-256 (stop if it differs):
 d073d2c9f99b7e66c7f2163b77b8f38fa0fd4e8fa23795c0b41e598fa19fc30e
 ```
 
-On Windows PowerShell, from the same extracted bundle:
+On Windows PowerShell, from the directory containing the downloaded tarball:
 
 ```powershell
 Get-FileHash ./behavectl-0.1.0-alpha.1.tgz -Algorithm SHA256
