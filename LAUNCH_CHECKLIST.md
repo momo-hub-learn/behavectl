@@ -2,6 +2,12 @@
 
 The GitHub alpha is public. Completed release gates and deferred follow-ups are tracked below.
 
+## Latest maintenance package — alpha.2
+
+[Alpha.2 is public](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.2) (2026-09-18). It fixes Studio first-use errors and guidance. All 137 tests, six OS/Node combinations, the deterministic release gate and downloaded-package installation/Studio smoke passed. No new real-agent certification is claimed; the alpha.1 proof below remains bound to alpha.1.
+
+Downloaded alpha.2 SHA-256: `46952a200e70bb45b787426450a69213792853df2e426ee98a62c9722ce3b474` (matches the release's `SHA256SUMS`).
+
 ## Product
 
 - [x] Stable public references for known CLI failures
