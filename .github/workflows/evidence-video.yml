@@ -1,0 +1,39 @@
+name: Evidence video
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/evidence-video/**'
+      - '.github/workflows/evidence-video.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: docs/evidence-video
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          package-manager-cache: false
+      - run: npm ci --no-audit --no-fund
+      - run: npm run lint
+      - name: Render evidence preview
+        run: |
+          npx remotion still EvidenceReplay out/before-preview.png --frame=180
+          npx remotion still EvidenceReplay out/after-preview.png --frame=480
+          npx remotion still EvidenceReplay out/result-preview.png --frame=780
+          npx remotion render EvidenceReplay out/behavectl-evidence-preview.mp4 --concurrency=2
+      - uses: actions/upload-artifact@v4
+        with:
+          name: behavectl-evidence-preview
+          path: docs/evidence-video/out/
+          retention-days: 14
