@@ -28,11 +28,21 @@ jobs:
       - run: npm run lint
       - name: Render evidence preview
         run: |
-          npx remotion still EvidenceReplay out/before-preview.png --frame=180
-          npx remotion still EvidenceReplay out/after-preview.png --frame=480
-          npx remotion still EvidenceReplay out/result-preview.png --frame=780
-          npx remotion render EvidenceReplay out/behavectl-evidence-preview.mp4 --concurrency=2
+          mkdir -p out
+          render() {
+            if ! npx remotion "$@" > out/render.log 2>&1; then
+              cat out/render.log
+              python3 -c 'from pathlib import Path; text=Path("out/render.log").read_text()[-12000:]; print("::error::" + text.replace("%", "%25").replace("\r", "%0D").replace("\n", "%0A"))'
+              exit 1
+            fi
+            cat out/render.log
+          }
+          render still EvidenceReplay out/before-preview.png --frame=180
+          render still EvidenceReplay out/after-preview.png --frame=480
+          render still EvidenceReplay out/result-preview.png --frame=780
+          render render EvidenceReplay out/behavectl-evidence-preview.mp4 --concurrency=2
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: behavectl-evidence-preview
           path: docs/evidence-video/out/
