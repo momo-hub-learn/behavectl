@@ -2,6 +2,14 @@
 
 All notable public changes to Behavectl will be documented here.
 
+## 0.1.0-alpha.2 — Studio first-use fixes
+
+- Fix an empty-project startup error so the correction form opens on first use.
+- Return empty projects to correction entry when selecting the project tab.
+- Explain incomplete verification drafts and missing Agent CLI/Git before starting real tasks.
+- Add regression coverage for empty projects, draft review, and execution readiness.
+- GitHub-only maintenance pre-release. Deterministic tests and package checks cover this build; it has not received a new artifact-bound real-agent RC certification. The retained Codex RC GO and 1/3 → 3/3 result apply only to alpha.1.
+
 ## Unreleased — Evidence-based project diagnosis
 
 - added bounded local rule/metadata conflict and repeated-correction diagnosis with file/line evidence;

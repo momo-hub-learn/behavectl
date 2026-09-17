@@ -6,7 +6,7 @@ Turn repeated corrections into reviewable rules. Compare real agent behavior
 before and after, inspect the evidence, then promote or roll back the change.
 Local-first · zero runtime dependencies · human-controlled promotion.
 
-[Download alpha](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1) · [Quickstart](docs/quickstart.md) · [Contribute](CONTRIBUTING.md)
+[Download alpha](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.2) · [Quickstart](docs/quickstart.md) · [Contribute](CONTRIBUTING.md)
 
 [![Watch the 30-second evidence replay: looks fixed, still broken.](https://github.com/momo-hub-learn/behavectl/releases/download/v0.1.0-alpha.1/before-preview.png)](https://github.com/momo-hub-learn/behavectl/releases/download/v0.1.0-alpha.1/behavectl-evidence-preview.mp4)
 
@@ -42,17 +42,18 @@ Two pairs improved; one already passed. All 13 release-candidate checks passed.
 This covers **one challenge on Codex**, not a general benchmark.
 [Certification and artifact fingerprint](LAUNCH_CHECKLIST.md).
 
-Codex is certified for this alpha. CodeBuddy Code and Claude Code adapters
-are available but are **not certified** in this release.
+The retained **alpha.1** package is Codex-certified. **Alpha.2** fixes Studio onboarding
+and passes deterministic checks; it has no new real-agent certification.
+CodeBuddy Code and Claude Code adapters are **not certified**.
 
 ## Get started
 
 Requires **Node.js 20+ and Git**. Download the `.tgz` from the
-[GitHub release](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1),
+[GitHub release](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.2),
 check its SHA-256 against the release notes, then run from the download directory:
 
 ```bash
-npm install --prefix ./local-runtime --ignore-scripts --no-audit --no-fund ./behavectl-0.1.0-alpha.1.tgz
+npm install --prefix ./local-runtime --ignore-scripts --no-audit --no-fund ./behavectl-0.1.0-alpha.2.tgz
 export PATH="$PWD/local-runtime/node_modules/.bin:$PATH"
 behavectl demo create --agents codex
 cd behavectl-killer-demo

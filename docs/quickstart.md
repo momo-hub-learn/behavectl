@@ -2,7 +2,7 @@
 
 ## 30 seconds: understand the product
 
-The [GitHub alpha](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1)
+The [GitHub alpha](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.2)
 is available. From a source checkout, try the tour without installation or a
 coding-agent account:
 
@@ -36,36 +36,31 @@ explicitly start real verification. Existing projects do not need captured
 history to try this workflow.
 
 The checkout can contain newer documentation or code than a certified package.
-The certification below applies to the exact retained tarball.
+The Codex certification applies only to the retained alpha.1 tarball.
 
-## Install the certified alpha locally
+## Install the latest maintenance alpha locally
 
-Download `behavectl-0.1.0-alpha.1.tgz` from the
-[GitHub release assets](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1).
-This is the retained **Codex RC GO** package; npm registry distribution is deferred. This is different from the original Trial
-Kit's older `candidate/` package.
+Download `behavectl-0.1.0-alpha.2.tgz` from the
+[GitHub release assets](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.2).
+Alpha.2 includes the Studio first-use fixes and passes deterministic release checks. It has no new artifact-bound real-agent certification. The retained **Codex RC GO** applies to the [alpha.1 package](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1). npm registry distribution remains deferred.
 
 From the directory containing the downloaded tarball, on macOS / Linux:
 
 ```bash
-shasum -a 256 behavectl-0.1.0-alpha.1.tgz
-npm install --prefix ./local-runtime --ignore-scripts --no-audit --no-fund ./behavectl-0.1.0-alpha.1.tgz
+shasum -a 256 behavectl-0.1.0-alpha.2.tgz
+npm install --prefix ./local-runtime --ignore-scripts --no-audit --no-fund ./behavectl-0.1.0-alpha.2.tgz
 export PATH="$PWD/local-runtime/node_modules/.bin:$PATH"
 behavectl --version
 behavectl agents
 ```
 
-Expected SHA-256 (stop if it differs):
-
-```text
-d073d2c9f99b7e66c7f2163b77b8f38fa0fd4e8fa23795c0b41e598fa19fc30e
-```
+Compare the computed SHA-256 with `SHA256SUMS` attached to the same alpha.2 release; stop if it differs.
 
 On Windows PowerShell, from the directory containing the downloaded tarball:
 
 ```powershell
-Get-FileHash ./behavectl-0.1.0-alpha.1.tgz -Algorithm SHA256
-npm install --prefix ./local-runtime --ignore-scripts --no-audit --no-fund ./behavectl-0.1.0-alpha.1.tgz
+Get-FileHash ./behavectl-0.1.0-alpha.2.tgz -Algorithm SHA256
+npm install --prefix ./local-runtime --ignore-scripts --no-audit --no-fund ./behavectl-0.1.0-alpha.2.tgz
 $env:Path = "$((Get-Location).Path)\local-runtime\node_modules\.bin;$env:Path"
 behavectl --version
 behavectl agents

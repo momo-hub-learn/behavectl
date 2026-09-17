@@ -1,6 +1,6 @@
 {
   "name": "behavectl",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0-alpha.2",
   "description": "Git for AI behavior. Review, test, prove, promote, and roll back persistent agent behavior.",
   "type": "module",
   "bin": {

@@ -9,6 +9,8 @@ const repoRoot = path.resolve(
   fileURLToPath(new URL("..", import.meta.url)),
 );
 
+const expectedVersion = JSON.parse(await fs.readFile(path.join(repoRoot, "package.json"), "utf8")).version;
+
 const temp = await fs.mkdtemp(
   path.join(os.tmpdir(), "behavectl-package-smoke-"),
 );
@@ -99,7 +101,7 @@ try {
 
   if (
     result.stdout.trim() !==
-    "0.1.0-alpha.1"
+    expectedVersion
   ) {
     throw new Error(
       `Unexpected installed version: ${result.stdout.trim()}`,
