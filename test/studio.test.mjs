@@ -67,3 +67,40 @@ test('review marks edited rules and edited specs as stale instead of current pro
  await writeJsonAtomic(file,{...spec,task:'Different task'});
  assert.equal((await buildReviewModel(store,patch)).verificationCurrent,false);
 });
+
+test('Studio returns empty projects to correction entry and blocks unready verification before confirmation', async () => {
+  const { createContext, runInContext } = await import('node:vm');
+  const html = await fs.readFile(new URL('../src/studio/index.html', import.meta.url), 'utf8');
+  const elements = new Map();
+  const element = () => ({ hidden:false, textContent:'', classList:{toggle(){},remove(){}},
+    replaceChildren(){}, appendChild(){}, querySelectorAll(){return []}, focus(){} });
+  const get = id => { if(!elements.has(id))elements.set(id,element());return elements.get(id); };
+  const initial = { project:'empty-project', models:[], health:{ready:{}}, job:null };
+  let requests=0, confirmations=0;
+  const context = createContext({
+    document:{getElementById:get,querySelector:()=>get('heading'),querySelectorAll:()=>[],createElement:element},
+    fetch:async()=>{requests++;return {ok:true,json:async()=>initial}},
+    setInterval(){}, confirm(){confirmations++;return true;}
+  });
+  runInContext(html.match(/<script>([\s\S]*?)<\/script>/)[1],context);
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(get('compose').hidden,false,get('notice').textContent);
+  get('tour').onclick();
+  assert.equal(get('compose').hidden,true);
+  get('project').onclick();
+  assert.equal(get('compose').hidden,false,get('notice').textContent);
+  assert.equal(get('reviewWorkspace').hidden,true);
+  runInContext(`state.models=[{patch:{id:'bp_onboarding',status:'candidate',targets:['codex'],behavior:{statement:'Use source'}},spec:{draft:true,task:'',checks:[]}}];selected='bp_onboarding';render()`,context);
+  assert.equal(get('run').disabled,true);
+  assert.equal(get('edit').textContent,'完善验证草稿');
+  assert.match(get('hint').textContent,/审查后保存/);
+  await get('run').onclick();
+  assert.equal(confirmations,0);
+  assert.equal(requests,1);
+  runInContext(`state.models[0].spec={draft:false,task:'Update source',checks:[{id:'source',label:'Source exists'}]};render()`,context);
+  assert.equal(get('run').disabled,true);
+  assert.match(get('hint').textContent,/codex/);
+  runInContext(`state.health.ready.codex=true;render()`,context);
+  assert.equal(get('run').disabled,false);
+  assert.match(get('hint').textContent,/6 次真实任务/);
+});

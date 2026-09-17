@@ -43,9 +43,9 @@ Behavectl's product surface stays deliberately small.
 - [x] Synthetic live raw-trace retention
 - [x] Infrastructure-failure / behavior-failure separation
 - [x] Public name selected: Behavectl
-- [ ] First retained authenticated declared-target proof (Codex + CodeBuddy killer demo)
+- [x] First retained authenticated declared-target proof (Codex profile; CodeBuddy certification deferred)
 - [ ] Public hero recording from retained raw proof
-- [ ] Alpha release
+- [x] Public GitHub alpha release
 
 ## Adoption milestones
 
@@ -54,7 +54,7 @@ outcome. Track whether people can use and contribute to the product first.
 These are proposed milestones; none is claimed as achieved.
 
 1. **Publishable alpha:** deterministic gates pass, the chosen real-agent profile
-   has retained artifact-bound evidence, and repository / npm ownership is confirmed.
+   has retained artifact-bound evidence, and GitHub distribution is verified; npm publication is deferred.
    See [the launch checklist](LAUNCH_CHECKLIST.md) for the release source of truth.
 2. **First 10 external trials:** record voluntary feedback on installation,
    time to the simulated demo, first real proof, failures, and repeat usage.
