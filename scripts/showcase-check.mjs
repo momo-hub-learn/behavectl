@@ -13,12 +13,12 @@ const readme = await fs.readFile(path.join(repoRoot, "README.md"), "utf8");
 const lines = readme.split(/\r?\n/);
 const failures = [];
 
-const hero = lines.slice(0, 80).join("\n");
+const hero = lines.slice(0, 25).join("\n");
 for (const phrase of [
   "Git for AI behavior.",
-  "Agents learn. Behavectl decides what gets to stick.",
+  "Test a correction before your agent keeps it.",
   "node src/cli/behavectl.mjs demo",
-  "No cloud. No daemon. No silent promotion.",
+  "SIMULATION",
 ]) {
   if (!hero.includes(phrase)) {
     failures.push(`README hero is missing: ${phrase}`);
@@ -31,8 +31,8 @@ if (firstSection !== -1 && demoIndex > firstSection) {
   failures.push("README makes the reader scroll before the first runnable demo.");
 }
 
-if (lines.length > 550) {
-  failures.push(`README is too long for the launch surface (${lines.length} lines > 550).`);
+if (lines.length > 120) {
+  failures.push(`README is too long for the launch surface (${lines.length} lines > 120).`);
 }
 
 for (const stale of [
@@ -45,14 +45,10 @@ for (const stale of [
   }
 }
 
-if (!readme.includes("That difference is the product.")) {
-  failures.push("README is missing the category-differentiation thesis.");
-}
-if (!readme.includes("Learning can be automatic. Shipping behavior should not be.")) {
-  failures.push("README is missing the signature trust line.");
-}
-if (!readme.includes("No retained real proof for the declared profile, no public claim for that")) {
-  failures.push("README is missing the profile-scoped evidence-gated release rule.");
+for (const phrase of ["human-controlled promotion", "not a general benchmark", "not certified", "may incur model costs"]) {
+  if (!readme.includes(phrase)) {
+    failures.push(`README is missing a trust or scope boundary: ${phrase}`);
+  }
 }
 
 const temp = await fs.mkdtemp(path.join(os.tmpdir(), "behavectl-showcase-"));

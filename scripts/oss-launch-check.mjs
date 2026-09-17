@@ -101,11 +101,11 @@ const readme = await fs.readFile(
 const readmeContracts = [
   "Git for AI behavior.",
   "node src/cli/behavectl.mjs demo",
-  "No cloud. No daemon. No silent promotion.",
-  "Use Behavectl *inside* your coding agent",
-  "Agent-native does not mean agent-controlled.",
+  "docs/quickstart.md",
+  "docs/trust-model.md",
+  "docs/phase6i-agent-native-mode.md",
   "Behavior Proof",
-  "behavectl ci init",
+  "docs/phase6c-behavior-ci.md",
 ];
 
 for (const phrase of readmeContracts) {
