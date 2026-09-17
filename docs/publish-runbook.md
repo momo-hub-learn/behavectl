@@ -79,7 +79,15 @@ exact bound npm artifact / release seal.
 
 ## 5. Publish exactly the sealed artifact
 
-Do not repack after RC. Publish the tarball retained by the GO bundle with the
-alpha dist-tag.
+First release distribution: **GitHub Releases**, selected by the user on
+2026-09-17. npm publication is deferred and does not block this route.
+
+Do not repack after RC. Attach the tarball retained by the GO bundle to the
+`v0.1.0-alpha.1` GitHub pre-release. Check GitHub’s asset SHA-256 against the
+release seal and include local-install instructions. A draft or a release in a
+private repository is not a public launch.
+
+When npm distribution is added later, publish that same retained tarball with
+the alpha dist-tag.
 
 > **What ships must be what was proved.**

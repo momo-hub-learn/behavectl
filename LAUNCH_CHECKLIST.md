@@ -99,7 +99,7 @@ The first public release is blocked until every **required** item is complete.
 - [x] Public product name selected: `Behavectl`; exact-name collision search found no indexed AI/devtool conflict
 
 - [x] Reserve/confirm the final GitHub repository name: `momo-hub-learn/behavectl` (private preparation repository)
-- [ ] Reserve/confirm the final npm package name
+- [ ] Reserve/confirm the final npm package name (deferred; GitHub-first distribution, user decision 2026-09-17)
 - [x] First public certification profile: `codex` (user decision, 2026-09-16); CodeBuddy certification follows later. Existing adapter support remains available.
 - [x] Produce artifact-bound authenticated evidence for the full `codex` profile (native single-machine RC, 2026-09-16).
 - [x] Complete profile / patch / spec / artifact-digest agreement verified. Distributed merge is not applicable to this single-machine Codex profile.
@@ -107,11 +107,11 @@ The first public release is blocked until every **required** item is complete.
 - [x] Confirm Release Candidate verdict = GO
 - [x] Archive the RC bundle containing raw traces, Protocol Replay report, Behavior Proof, exact npm tarball, and RELEASE_SEAL.md
 - [x] Verify RELEASE_SEAL.md against the retained npm tarball
-- [ ] Record hero terminal demo from the retained proof run
+- [ ] Record hero terminal demo from the retained proof run (follow-up; not claimed as complete for the GitHub-first release)
 - [x] Replace README illustrative output with real retained output (Codex generated-config challenge; 1/3 → 3/3).
 - [x] Add real repository/homepage/bug-report metadata to `package.json`
 - [ ] Tag `v0.1.0-alpha.1`
-- [ ] Publish npm alpha
+- [ ] Publish npm alpha (follow-up; not a blocker for GitHub-first release)
 - [ ] Public GitHub launch
 
 Certified artifact (2026-09-16): `behavectl-0.1.0-alpha.1.tgz`, SHA-256
