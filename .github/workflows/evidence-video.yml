@@ -41,7 +41,7 @@ jobs:
           render still EvidenceReplay out/after-preview.png --frame=480
           render still EvidenceReplay out/result-preview.png --frame=780
           render render EvidenceReplay out/behavectl-evidence-preview.mp4 --concurrency=2
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: behavectl-evidence-preview
