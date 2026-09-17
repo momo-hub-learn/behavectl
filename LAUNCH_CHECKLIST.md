@@ -110,7 +110,7 @@ The first public release is blocked until every **required** item is complete.
 - [ ] Record hero terminal demo from the retained proof run (follow-up; not claimed as complete for the GitHub-first release)
 - [x] Replace README illustrative output with real retained output (Codex generated-config challenge; 1/3 → 3/3).
 - [x] Add real repository/homepage/bug-report metadata to `package.json`
-- [ ] Tag `v0.1.0-alpha.1`
+- [x] Tag `v0.1.0-alpha.1` and GitHub pre-release created (2026-09-17; repository still private)
 - [ ] Publish npm alpha (follow-up; not a blocker for GitHub-first release)
 - [ ] Public GitHub launch
 
@@ -118,7 +118,9 @@ Certified artifact (2026-09-16): `behavectl-0.1.0-alpha.1.tgz`, SHA-256
 `d073d2c9f99b7e66c7f2163b77b8f38fa0fd4e8fa23795c0b41e598fa19fc30e`.
 Run `live_mu47ciwe498dc7c515`, verification `verify_mu47ggq14a94976b87`:
 baseline 1/3 passed, candidate 3/3 passed; all six tasks exited 0 without timeout.
-The retained GO bundle and archive are local; this does not mean npm or GitHub is public.
+The full GO bundle and archive remain local. The certified tarball is attached to
+the GitHub pre-release at https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1.
+The repository is still private; public visibility is the remaining GitHub launch step.
 
 ## Launch rule
 
