@@ -17,6 +17,10 @@ learn
 → rollback
 ```
 
+### Watch the result
+
+[30-second Codex evidence replay](https://github.com/momo-hub-learn/behavectl/releases/download/v0.1.0-alpha.1/behavectl-evidence-preview.mp4): source left stale → source corrected → three paired trials, 1/3 to 3/3. This is a visualization of retained evidence, not live screen footage.
+
 ### What is in the first alpha
 
 - Agent Registry with Codex, CodeBuddy Code, and Claude Code behavior adapters

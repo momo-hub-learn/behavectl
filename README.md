@@ -8,6 +8,10 @@ Local-first · zero runtime dependencies · human-controlled promotion.
 
 [Download alpha](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.1) · [Quickstart](docs/quickstart.md) · [Contribute](CONTRIBUTING.md)
 
+[![Watch the 30-second evidence replay: looks fixed, still broken.](https://github.com/momo-hub-learn/behavectl/releases/download/v0.1.0-alpha.1/before-preview.png)](https://github.com/momo-hub-learn/behavectl/releases/download/v0.1.0-alpha.1/behavectl-evidence-preview.mp4)
+
+**[Watch the 30-second evidence replay](https://github.com/momo-hub-learn/behavectl/releases/download/v0.1.0-alpha.1/behavectl-evidence-preview.mp4)** · Retained Codex evidence, not live screen footage.
+
 Try the 30-second tour from a source checkout:
 
 ```bash

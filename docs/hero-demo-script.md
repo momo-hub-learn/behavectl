@@ -60,5 +60,4 @@ recorded. Certification is evidence of eligibility, not evidence of promotion.
 - Keep the result limitation visible: one challenge, Codex, three paired trials.
 - `assets/codex-proof.svg` is a static evidence summary, not a recording or UI screenshot.
 
-The recording itself remains a launch-checklist item until a video is produced
-and visually checked.
+The terminal recording remains a follow-up. The published [30-second evidence replay](https://github.com/momo-hub-learn/behavectl/releases/download/v0.1.0-alpha.1/behavectl-evidence-preview.mp4) follows this before/after story using reconstructed evidence cards; it is not terminal footage. Its three key frames were visually checked on 2026-09-17. The maintained replay source is [evidence-video](evidence-video/README.md).

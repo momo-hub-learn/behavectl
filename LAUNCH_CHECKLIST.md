@@ -1,6 +1,6 @@
 # Behavectl Alpha Launch Checklist
 
-The first public release is blocked until every **required** item is complete.
+The GitHub alpha is public. Completed release gates and deferred follow-ups are tracked below.
 
 ## Product
 
@@ -94,7 +94,7 @@ The first public release is blocked until every **required** item is complete.
 - [x] Security policy
 - [x] Contributor guide
 
-## Release blockers
+## Release gates and follow-ups
 
 - [x] Public product name selected: `Behavectl`; exact-name collision search found no indexed AI/devtool conflict
 
@@ -107,6 +107,7 @@ The first public release is blocked until every **required** item is complete.
 - [x] Confirm Release Candidate verdict = GO
 - [x] Archive the RC bundle containing raw traces, Protocol Replay report, Behavior Proof, exact npm tarball, and RELEASE_SEAL.md
 - [x] Verify RELEASE_SEAL.md against the retained npm tarball
+- [x] Publish 30-second retained-evidence replay and link it from README; three key frames visually checked (2026-09-17). This does not replace a terminal recording.
 - [ ] Record hero terminal demo from the retained proof run (follow-up; not claimed as complete for the GitHub-first release)
 - [x] Replace README illustrative output with real retained output (Codex generated-config challenge; 1/3 → 3/3).
 - [x] Add real repository/homepage/bug-report metadata to `package.json`
