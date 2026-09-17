@@ -11,4 +11,4 @@ npm run dev
 npx remotion render EvidenceReplay out/behavectl-evidence-preview.mp4
 ```
 
-The Evidence video workflow renders three review frames and a preview MP4 as downloadable Actions artifacts. It has read-only repository permissions and does not publish release assets. Review the frames before publishing the video or linking it from the homepage.
+On main-branch changes to this directory or its workflow, the Evidence video workflow renders three review frames and a preview MP4. It also supports manual runs on main. Successful runs upload these four named media files to the existing `v0.1.0-alpha.1` GitHub release, replacing same-name assets. Runs are serialized to avoid concurrent uploads. The certified installation package is not an upload target. Actions artifacts remain available for 14 days, including diagnostics on failure. Review the frames before linking the preview from the homepage.

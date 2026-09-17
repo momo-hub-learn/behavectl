@@ -11,8 +11,15 @@ on:
 permissions:
   contents: read
 
+concurrency:
+  group: evidence-video-release
+  cancel-in-progress: false
+
 jobs:
   render:
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     timeout-minutes: 15
     defaults:
@@ -47,3 +54,14 @@ jobs:
           name: behavectl-evidence-preview
           path: docs/evidence-video/out/
           retention-days: 14
+      - name: Publish preview media to alpha release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          gh release upload v0.1.0-alpha.1 \
+            out/before-preview.png \
+            out/after-preview.png \
+            out/result-preview.png \
+            out/behavectl-evidence-preview.mp4 \
+            --clobber
