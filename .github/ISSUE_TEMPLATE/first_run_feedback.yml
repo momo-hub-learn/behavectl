@@ -1,0 +1,42 @@
+name: First-run feedback / 首次试用反馈
+description: Tell us what you tried and where you got stuck. / 告诉我们你试了什么、卡在哪里。
+title: "[first run] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        You do not need a successful verification to send feedback. Opening Studio and trying the simulation make no model calls; real verification is optional and may incur model costs.
+        不必先跑通验证。打开 Studio 和模拟演示不会调用模型；真实验证是可选的，可能产生模型费用。
+        Share a small example, not credentials or private project files. / 请用最小例子说明，不要上传凭据或私有项目文件。
+  - type: textarea
+    id: problem
+    attributes:
+      label: What keeps going wrong? / 你反复纠正的是什么问题？
+      placeholder: "Example: my agent edits generated config instead of its source. / 例如：Agent 总是直接修改生成文件。"
+    validations:
+      required: true
+  - type: dropdown
+    id: stage
+    attributes:
+      label: How far did you get? / 你进行到了哪一步？
+      options:
+        - "Read the page or watched the video / 看了介绍或视频"
+        - "Tried installation / 尝试安装"
+        - "Opened Studio or the simulation / 打开了 Studio 或模拟演示"
+        - "Created a correction draft / 创建了纠正草稿"
+        - "Tried real verification / 尝试真实验证"
+        - "Reviewed a result or enabled a rule / 审查结果或启用规则"
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What happened, and would you use it again? / 发生了什么，你还会再用吗？
+      description: Include the confusing step, error, or useful result. / 写下困惑、报错或有帮助的结果。
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Version, OS and Agent (optional) / 版本、系统和 Agent（选填）
+      placeholder: "alpha.2 / macOS / Codex"

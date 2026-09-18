@@ -2,8 +2,8 @@
 
 **Git for AI behavior.** Test a correction before your agent keeps it.
 
-Turn repeated corrections into reviewable rules. Compare real agent behavior
-before and after, inspect the evidence, then promote or roll back the change.
+Tired of correcting your coding agent for the same mistake? Turn that correction
+into a rule, test it against the original behavior, and inspect what actually changed.
 Local-first · zero runtime dependencies · human-controlled promotion.
 
 [Download alpha](https://github.com/momo-hub-learn/behavectl/releases/tag/v0.1.0-alpha.2) · [Quickstart](docs/quickstart.md) · [Contribute](CONTRIBUTING.md)
@@ -66,6 +66,8 @@ publication is deferred. [Windows and your own project →](docs/quickstart.md)
 Opening Studio makes no model calls. Real verification requires an authenticated
 agent and an explicit start, and may incur model costs. Promotion is a separate
 decision; simulations cannot authorize it.
+
+Trying it on your project? [Tell us what you tried and where you got stuck](https://github.com/momo-hub-learn/behavectl/issues/new?template=first_run_feedback.yml). A failed attempt is useful feedback too.
 
 ## Documentation
 
